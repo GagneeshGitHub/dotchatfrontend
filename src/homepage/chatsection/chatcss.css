@@ -1,0 +1,177 @@
+/* Css files for chat section */
+
+.InChatSection{
+    width: 90%;
+    border-radius: 20px;
+    height: 90%;
+    background-color: #C5948C;
+}
+
+.InContactSection{
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    scrollbar-color: transparent transparent;
+}
+
+.chatUserHeader{
+    background-color: #572854;
+    height: 10%;
+    width: 100%;
+    border-radius: 10px 10px 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.userImageRightSection{
+    height: 90%;
+    width: 7%;
+    margin-left: 10px;
+}
+
+.userImageRightSection img{
+    height: 100%;
+}
+
+.chatUsername{
+    font-size: larger;
+    font-weight: 600;
+    color: #C5948C;
+}
+
+/* Mid chat section */
+.midChatSection{
+    width: 100%;
+    height: 77%;
+    overflow: scroll;
+    scrollbar-color: transparent transparent;
+}
+
+/* Input Text Section */
+.inputTextSection{
+    width: 100%;
+    height: 13%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boxForInputText{
+    width: 90%;
+    height: 80%;
+    border-radius: 10px;
+    background-color: #572854;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputText{
+    background-color: transparent;
+    border: none;
+    width: 80%;
+    height: 70%;
+    color: #C5948C;
+    font-size: 15px;
+}
+
+.inputText:focus{
+    outline: 0px;
+}
+
+.submitText{
+    color: #C5948C;
+    background-color: transparent;
+    border: 2px solid #C5948C;
+    height: 60%;
+    width: 10%;
+    border-radius: 5px;
+}
+
+/* Classes for user contact boxes */
+
+.userContactBox{
+    width: 100%;
+    height: 70px;
+    background-color: #8F5E6B;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uphotoname{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.userImage{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: violet;
+}
+
+.nmsg{
+    align-items: center;
+    margin-left: 10px;
+}
+
+.usernameRight{
+    margin: 0%;
+    color: #572854;
+    font-weight: bold;
+}
+
+.lastmsgRight{
+    margin: 0%;
+    color: white;
+}
+
+.userImgCtSec{
+    width: 100%;
+    height: 100%;
+}
+
+.msgIs{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.inMsgIs{
+    width: 250px;
+    height: auto;
+    background-color: #8F5E6B;
+    border-radius: 10px;
+    margin-left: 20px;
+    padding: 10px;
+    color: #572854;
+}
+
+.msgIsCurrUser{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.inMsgIsCurrUser{
+    width: 250px;
+    height: auto;
+    background-color: #FFFAE8;
+    border-radius: 10px;
+    margin-right: 20px;
+    padding: 10px;
+    color: #572854;
+}

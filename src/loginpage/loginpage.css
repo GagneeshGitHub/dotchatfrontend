@@ -1,0 +1,103 @@
+.loginPage{
+    width: 100%;
+    height: 100vh;
+}
+
+.upperLoginSection{
+    width: 100%;
+    height: 15vh;
+    background-color: #8F5E6B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dotLogo{
+    width: 60%;
+    height: 90%;
+    border: 2px solid #24012F;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dotLogo:hover .dotImage{
+    scale: 1.2;
+}
+
+.dotImage{
+    width: 40%;
+    transition: 1.5s;
+}
+
+
+/* Lower login section */
+.lowerLoginSection{
+    width: 100%;
+    height: 85vh;
+    background-color: #C5948C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginBox{
+    width: 90vh;
+    height: 50vh;
+    background-color: #FFFAE8;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inLoginBox{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 80%;
+}
+
+/* inputBoxes */
+#usernameid{
+    width: 97%;
+    height: 40px;
+    margin-bottom: 50px;
+    border: 2px solid #572854;
+    background-color: #C5948C;
+}
+
+#passwordid{
+    width: 97%;
+    height: 40px;
+    border: 2px solid #572854;
+    background-color: #C5948C;
+}
+
+.loginBtnDiv{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submitBtn{
+    height: 90%;
+    margin-top: 40px;
+    transition: 0.5s;
+}
+
+.submitBtn:hover{
+    scale: 1.2;
+}
+
+.inputLoginField{
+    color: white;
+    font-size: 15px;
+}
+
+.inputLoginField:focus{
+    outline: none;
+}
