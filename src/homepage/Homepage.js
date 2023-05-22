@@ -34,7 +34,7 @@ export default function Homepage() {
   }
 
   // State for storing the other username
-  const [otherUsername, setOtherUsername] = useState("gagneeshvimal");
+  const [otherUsername, setOtherUsername] = useState("pooja222");
 
   //State for seding message using socket io
 
