@@ -16,8 +16,8 @@ export default function Homepage() {
 
   // Setup the socket
   useEffect(()=>{
-    // mySocket = io("https://nodejsdotchatbackend.onrender.com")
-    mySocket = io("http://localhost:8081")
+    mySocket = io("https://nodejsdotchatbackend.onrender.com")
+    // mySocket = io("http://localhost:8081")
     // console.log(mySocket)
     mySocket.on(localStorage.getItem('username'),(data)=>{
       // if(data.username===otherUsername){
@@ -35,19 +35,19 @@ export default function Homepage() {
 
   //Adding the message to the state
   const addMessage = (data,status)=>{
-    console.log("Before changing the value of array, array is: ", allMessage)
+    // console.log("Before changing the value of array, array is: ", allMessage)
     let username = data.username
     let message = data.message
     let toAddMessage = [username,status,message]
     let prevArray = allMessage
-    console.log("Prev array is: ", allMessage)
+    // console.log("Prev array is: ", allMessage)
     setAllMessage([...prevArray,toAddMessage]);
   }
 
-  useEffect(()=>{
-    console.log("allMessage is changed.....");
-    console.log(allMessage)
-  },[allMessage])
+  // useEffect(()=>{
+  //   console.log("allMessage is changed.....");
+  //   console.log(allMessage)
+  // },[allMessage])
 
   // State for storing the other username
   const [otherUsername, setOtherUsername] = useState("pooja222");
@@ -75,9 +75,9 @@ export default function Homepage() {
 
 
   // Print allMessage function every 2 seconds to see where it is going wrong.
-  const disAllMess = setInterval(()=>{
-    console.log("Every 2 seconds value of allMessage is: ", allMessage)
-  },2*1000)
+  // const disAllMess = setInterval(()=>{
+  //   console.log("Every 2 seconds value of allMessage is: ", allMessage)
+  // },2*1000)
 
 
   const navigate = useNavigate();
@@ -86,9 +86,9 @@ export default function Homepage() {
 
   // Exit the page if the ip is not saved in the server
   useEffect(()=>{
-    console.log("We entered the login page");
-    // fetch('https://nodejsdotchatbackend.onrender.com/checklogin')
-    fetch('http://localhost:8081/checklogin')
+    // console.log("We entered the login page");
+    fetch('https://nodejsdotchatbackend.onrender.com/checklogin')
+    // fetch('http://localhost:8081/checklogin')
     .then(data=>data.json())
     .then(data=>{ 
       if(data.loggedin === false){
@@ -102,8 +102,8 @@ export default function Homepage() {
   const logoutPrompt = ()=>{
     let response = window.confirm("Do you really want to logout");
     if(response){
-      // fetch("https://nodejsdotchatbackend.onrender.com/logoutme")
-      fetch("http://localhost:8081/logoutme")
+      fetch("https://nodejsdotchatbackend.onrender.com/logoutme")
+      // fetch("http://localhost:8081/logoutme")
       .then(data=>navigate("/"));
     }
   }

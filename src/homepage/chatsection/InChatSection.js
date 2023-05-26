@@ -6,7 +6,7 @@ export default function InChatSection({sendMessage,otherUsername,allMessage}) {
 
   const addingMessages = ()=>{
     allMessage.map((arrElem)=>{
-      console.log("We are inside the all message of the received message.")
+      // console.log("We are inside the all message of the received message.")
       if(arrElem[0]===otherUsername){
         // console.log("We have got a message from other user")
         if(arrElem[1]==="rec"){
@@ -19,7 +19,7 @@ export default function InChatSection({sendMessage,otherUsername,allMessage}) {
           outerDiv.appendChild(innDiv);
           document.getElementById('midChatSec').appendChild(outerDiv);
         } else if(arrElem[1]==='sent'){
-          console.log("We got a message by ourself, so displaying it.")
+          // console.log("We got a message by ourself, so displaying it.")
           var outerDiv = document.createElement('div');
           var innDiv = document.createElement('div')
           innDiv.innerHTML = arrElem[2];
@@ -33,8 +33,8 @@ export default function InChatSection({sendMessage,otherUsername,allMessage}) {
   }
 
   useEffect(()=>{
-    console.log("List of all message is: ")
-    // console.log(allMessage)
+    // console.log("List of all message is: ")
+    // // console.log(allMessage)
     if(allMessage.length !== 0){
       removeOtherMsg();
       chkDocmentExistence(false);
