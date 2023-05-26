@@ -4,21 +4,13 @@ import profileImg from '../../assets/media/girlFirst.png'
 
 export default function InChatSection({sendMessage,otherUsername,allMessage}) {
 
-  useEffect(()=>{
-    var elementOther = Array.from(document.getElementsByClassName('msgIs'))
-    var elementMy = Array.from(document.getElementsByClassName('msgIsCurrUser'))
-    elementMy.map((element)=>{
-      element.remove()
-    })
-    elementOther.map((element)=>{
-      element.remove()
-    })
-
+  const addingMessages = ()=>{
     allMessage.map((arrElem)=>{
       console.log("We are inside the all message of the received message.")
       if(arrElem[0]===otherUsername){
-        console.log("We have got a message from other user")
+        // console.log("We have got a message from other user")
         if(arrElem[1]==="rec"){
+          // console.log("")
           var outerDiv = document.createElement('div');
           var innDiv = document.createElement('div')
           innDiv.innerHTML = arrElem[2];
@@ -26,7 +18,8 @@ export default function InChatSection({sendMessage,otherUsername,allMessage}) {
           innDiv.className = 'inMsgIs'
           outerDiv.appendChild(innDiv);
           document.getElementById('midChatSec').appendChild(outerDiv);
-        } else {
+        } else if(arrElem[1]==='sent'){
+          console.log("We got a message by ourself, so displaying it.")
           var outerDiv = document.createElement('div');
           var innDiv = document.createElement('div')
           innDiv.innerHTML = arrElem[2];
@@ -37,7 +30,43 @@ export default function InChatSection({sendMessage,otherUsername,allMessage}) {
         }
       }
     })
+  }
+
+  useEffect(()=>{
+    console.log("List of all message is: ")
+    // console.log(allMessage)
+    if(allMessage.length !== 0){
+      removeOtherMsg();
+      chkDocmentExistence(false);
+    }
   })
+
+  const chkDocmentExistence = (stat)=>{
+    if(stat){
+      new Promise((resolve,reject)=>{
+        resolve(addingMessages())
+        return 
+      })
+    }
+    else if(!stat){
+      if(document.getElementsByClassName('msgIs').length===0 && document.getElementsByClassName('msgIsCurrUser').length ===0){
+        chkDocmentExistence(true)
+      } else {
+        chkDocmentExistence(false)
+      }
+    }
+  }
+
+  const removeOtherMsg = ()=>{
+    var elementOther = Array.from(document.getElementsByClassName('msgIs'))
+    var elementMy = Array.from(document.getElementsByClassName('msgIsCurrUser'))
+    elementMy.map((element)=>{
+      element.remove()
+    })
+    elementOther.map((element)=>{
+      element.remove()
+    })
+  }
 
   return (
     <div className='InChatSection'>
@@ -54,7 +83,9 @@ export default function InChatSection({sendMessage,otherUsername,allMessage}) {
         <div className='inputTextSection'>
             <div className='boxForInputText'>
                 <input id='inputedText' className='inputText' type="text" />
-                <input className='submitText' type="submit" value={"Submit"} onClick={()=>sendMessage()}/>
+                <input className='submitText' type="submit" value={"Submit"} onClick={()=>{
+                  sendMessage()
+                }}/>
             </div>
         </div>
     </div>

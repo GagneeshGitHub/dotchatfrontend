@@ -7,8 +7,6 @@ import { io, Socket } from 'socket.io-client'
 
 import './loginpage.css'
 
-let socketclient;
-
 export default function Loginpage() {
     const navigate = useNavigate();
     
@@ -35,7 +33,8 @@ export default function Loginpage() {
         body: JSON.stringify({username,password})
       }
 
-      fetch("https://nodejsdotchatbackend.onrender.com/login",context)
+      // fetch("https://nodejsdotchatbackend.onrender.com/login",context)
+      fetch("http://localhost:8081/login",context)
       .then(data=>data.json())
       .then(data=>{
         console.log("Login sucess ",data.loginSuccess)
@@ -51,10 +50,12 @@ export default function Loginpage() {
 
     useEffect(()=>{
         console.log("We entered the login page");
-        fetch('https://nodejsdotchatbackend.onrender.com/checklogin')
+        // fetch('https://nodejsdotchatbackend.onrender.com/checklogin')
+        fetch('http://localhost:8081/checklogin')
         .then(data=>data.json())
         .then(data=>{ 
           if(data.loggedin == true){
+            localStorage.setItem('username',data.username)
             navigate('/chat')
           }
          });

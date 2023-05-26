@@ -16,22 +16,38 @@ export default function Homepage() {
 
   // Setup the socket
   useEffect(()=>{
-    mySocket = io("https://nodejsdotchatbackend.onrender.com")
-    console.log(mySocket)
-    var myUsername = localStorage.getItem('username')
-    mySocket.on(myUsername,(data)=>{
+    // mySocket = io("https://nodejsdotchatbackend.onrender.com")
+    mySocket = io("http://localhost:8081")
+    // console.log(mySocket)
+    mySocket.on(localStorage.getItem('username'),(data)=>{
+      // if(data.username===otherUsername){
+      //     var outerDiv = document.createElement('div');
+      //     var innDiv = document.createElement('div')
+      //     innDiv.innerHTML = data.message;
+      //     outerDiv.className = 'msgIs'
+      //     innDiv.className = 'inMsgIs'
+      //     outerDiv.appendChild(innDiv);
+      //     document.getElementById('midChatSec').appendChild(outerDiv);
+      // }
       addMessage(data,"rec");
     })
   },[])
 
-  //Adding the messag to the state
+  //Adding the message to the state
   const addMessage = (data,status)=>{
+    console.log("Before changing the value of array, array is: ", allMessage)
     let username = data.username
     let message = data.message
     let toAddMessage = [username,status,message]
-    setAllMessage([...allMessage,toAddMessage])
-    console.log("we are adding the recevied message.")
+    let prevArray = allMessage
+    console.log("Prev array is: ", allMessage)
+    setAllMessage([...prevArray,toAddMessage]);
   }
+
+  useEffect(()=>{
+    console.log("allMessage is changed.....");
+    console.log(allMessage)
+  },[allMessage])
 
   // State for storing the other username
   const [otherUsername, setOtherUsername] = useState("pooja222");
@@ -39,29 +55,46 @@ export default function Homepage() {
   //State for seding message using socket io
 
   const sendMessage = ()=>{
-    console.log("SENT MESSAGE IS: ");
+
+    // console.log("SENT MESSAGE IS: ");
     var message = document.getElementById('inputedText').value;
+    if(message===""){
+      return;
+    }
     mySocket.emit("sendMessage",{
       otherUser: otherUsername,
       message
     })
+    // console.log("Sent message is: ", message)
 
     let toAddMsg = [otherUsername,"sent",message]
 
     setAllMessage([...allMessage,toAddMsg])
+    document.getElementById('inputedText').value = "";
   }
+
+
+  // Print allMessage function every 2 seconds to see where it is going wrong.
+  const disAllMess = setInterval(()=>{
+    console.log("Every 2 seconds value of allMessage is: ", allMessage)
+  },2*1000)
 
 
   const navigate = useNavigate();
 
+  //Remove previous message if any
+
   // Exit the page if the ip is not saved in the server
   useEffect(()=>{
     console.log("We entered the login page");
-    fetch('https://nodejsdotchatbackend.onrender.com/checklogin')
+    // fetch('https://nodejsdotchatbackend.onrender.com/checklogin')
+    fetch('http://localhost:8081/checklogin')
     .then(data=>data.json())
     .then(data=>{ 
       if(data.loggedin === false){
         navigate('/')
+      } else {
+        localStorage.setItem('username',data.username);
       }
      });
 },[])
@@ -69,7 +102,9 @@ export default function Homepage() {
   const logoutPrompt = ()=>{
     let response = window.confirm("Do you really want to logout");
     if(response){
-      fetch("https://nodejsdotchatbackend.onrender.com/logoutme").then(data=>navigate("/"));
+      // fetch("https://nodejsdotchatbackend.onrender.com/logoutme")
+      fetch("http://localhost:8081/logoutme")
+      .then(data=>navigate("/"));
     }
   }
 
