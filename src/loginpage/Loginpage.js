@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import dotImage from '../assets/media/dotchatlogo.png'
 import submitBtn from '../assets/media/submitbtn.png'
-import { io, Socket } from 'socket.io-client'
 
 import './loginpage.css'
 
