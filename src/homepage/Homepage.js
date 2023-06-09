@@ -16,8 +16,8 @@ export default function Homepage() {
 
   // Setup the socket
   useEffect(()=>{
-    mySocket = io("https://nodejsdotchatbackend.onrender.com")
-    // mySocket = io("http://localhost:8081")
+    // mySocket = io("https://nodejsdotchatbackend.onrender.com")
+    mySocket = io("http://localhost:8081")
     // console.log(mySocket)
     mySocket.on(localStorage.getItem('username'),(data)=>{
       // if(data.username===otherUsername){
@@ -87,8 +87,8 @@ export default function Homepage() {
   // Exit the page if the ip is not saved in the server
   useEffect(()=>{
     // console.log("We entered the login page");
-    fetch('https://nodejsdotchatbackend.onrender.com/checklogin')
-    // fetch('http://localhost:8081/checklogin')
+    // fetch('https://nodejsdotchatbackend.onrender.com/checklogin')
+    fetch('http://localhost:8081/checklogin')
     .then(data=>data.json())
     .then(data=>{ 
       if(data.loggedin === false){
@@ -102,8 +102,8 @@ export default function Homepage() {
   const logoutPrompt = ()=>{
     let response = window.confirm("Do you really want to logout");
     if(response){
-      fetch("https://nodejsdotchatbackend.onrender.com/logoutme")
-      // fetch("http://localhost:8081/logoutme")
+      // fetch("https://nodejsdotchatbackend.onrender.com/logoutme")
+      fetch("http://localhost:8081/logoutme")
       .then(data=>navigate("/"));
     }
   }

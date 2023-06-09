@@ -1,6 +1,5 @@
 {
   "name": "frontend",
-  "homepage": "https://gagneeshgithub.github.io/dotchatfrontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

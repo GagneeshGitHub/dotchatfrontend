@@ -32,8 +32,8 @@ export default function Loginpage() {
         body: JSON.stringify({username,password})
       }
 
-      fetch("https://nodejsdotchatbackend.onrender.com/login",context)
-      // fetch("http://localhost:8081/login",context)
+      // fetch("https://nodejsdotchatbackend.onrender.com/login",context)
+      fetch("http://localhost:8081/login",context)
       .then(data=>data.json())
       .then(data=>{
         console.log("Login sucess ",data.loginSuccess)
@@ -49,8 +49,8 @@ export default function Loginpage() {
 
     useEffect(()=>{
         // console.log("We entered the login page");
-        fetch('https://nodejsdotchatbackend.onrender.com/checklogin')
-        // fetch('http://localhost:8081/checklogin')
+        // fetch('https://nodejsdotchatbackend.onrender.com/checklogin')
+        fetch('http://localhost:8081/checklogin')
         .then(data=>data.json())
         .then(data=>{ 
           if(data.loggedin == true){
