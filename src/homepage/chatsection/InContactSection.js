@@ -19,7 +19,7 @@ export default function InContactSection({setOtherUsername}) {
 
   useEffect(()=>{
     fetch("https://nodejsdotchatbackend.onrender.com/getContactList")
-    // fetch("https://nodejsdotchatbackend.onrender.com/getContactList")
+    // fetch("http://localhost:8081/getContactList")
     .then(data=>data.json()).then(data=>{
       setContactList(data)
       setOtherUsername(data[0])
