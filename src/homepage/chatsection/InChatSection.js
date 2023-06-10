@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import './chatcss.css'
-import profileImg from '../../assets/media/girlFirst.png' 
+import profileImg from '../../assets/media/girlFirst.png'
+import { setStoredMessage } from '../storingMessg' 
 
 export default function InChatSection({sendMessage,otherUsername,allMessage}) {
 

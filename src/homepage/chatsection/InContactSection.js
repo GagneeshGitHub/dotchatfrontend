@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './chatcss.css'
 import UserContact from './UserContact'
 
 export default function InContactSection({setOtherUsername}) {
 
-  const [contactList, setContactList] = useState([{name:"pooja222",image:"../../assets/media/girlFirst.png"},{name:"gagneeshvimal101",image:"../../assets/media/girlOne.png"},{name:"gagneeshvimal",image:"../../assets/media/girlOne.png"},{name:"poojavimal10",image:"../../assets/media/girlOne.png"}]);
+  const [contactList, setContactList] = useState([])
   const [prevDivId,setPrevId] = useState("");
 
   const setSelection =(theIndex)=>{
@@ -17,11 +17,20 @@ export default function InContactSection({setOtherUsername}) {
     document.getElementById(idIs).style.backgroundColor = "#24012F";
   }
 
+  useEffect(()=>{
+    fetch("https://nodejsdotchatbackend.onrender.com/getContactList")
+    // fetch("https://nodejsdotchatbackend.onrender.com/getContactList")
+    .then(data=>data.json()).then(data=>{
+      setContactList(data)
+      setOtherUsername(data[0])
+    })
+  },[])
+
   return (
     <div className='InContactSection'>
         {
             contactList.map((elem,index)=>{
-                return <UserContact setOtherUsername={setOtherUsername} setSelection={setSelection} userName={elem.name} userImage={elem.image} key={index} partIndex={index}/>
+                return <UserContact setOtherUsername={setOtherUsername} setSelection={setSelection} userName={elem} userImage={"../../assets/media/girlOne.png"} key={index} partIndex={index}/>
             })
         }
     </div>

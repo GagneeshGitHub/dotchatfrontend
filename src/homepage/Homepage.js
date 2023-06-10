@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { io } from 'socket.io-client'
 import dotChatLogo from '../assets/media/dotchatlogo.png'
+import {setStoredMessage} from './storingMessg'
 
 let mySocket;
 
@@ -16,38 +17,25 @@ export default function Homepage() {
 
   // Setup the socket
   useEffect(()=>{
-    // mySocket = io("https://nodejsdotchatbackend.onrender.com")
-    mySocket = io("http://localhost:8081")
-    // console.log(mySocket)
+    mySocket = io("https://nodejsdotchatbackend.onrender.com")
+    // mySocket = io("http://localhost:8081")
     mySocket.on(localStorage.getItem('username'),(data)=>{
-      // if(data.username===otherUsername){
-      //     var outerDiv = document.createElement('div');
-      //     var innDiv = document.createElement('div')
-      //     innDiv.innerHTML = data.message;
-      //     outerDiv.className = 'msgIs'
-      //     innDiv.className = 'inMsgIs'
-      //     outerDiv.appendChild(innDiv);
-      //     document.getElementById('midChatSec').appendChild(outerDiv);
-      // }
+      console.log("BAM AV IS: ",allMessage)
       addMessage(data,"rec");
     })
+    console.log("Function component is called once again")
   },[])
 
   //Adding the message to the state
   const addMessage = (data,status)=>{
-    // console.log("Before changing the value of array, array is: ", allMessage)
+
     let username = data.username
     let message = data.message
     let toAddMessage = [username,status,message]
-    let prevArray = allMessage
-    // console.log("Prev array is: ", allMessage)
-    setAllMessage([...prevArray,toAddMessage]);
-  }
 
-  // useEffect(()=>{
-  //   console.log("allMessage is changed.....");
-  //   console.log(allMessage)
-  // },[allMessage])
+    setStoredMessage("set",toAddMessage)
+    setAllMessage(setStoredMessage("get"));
+  }
 
   // State for storing the other username
   const [otherUsername, setOtherUsername] = useState("pooja222");
@@ -69,26 +57,19 @@ export default function Homepage() {
 
     let toAddMsg = [otherUsername,"sent",message]
 
-    setAllMessage([...allMessage,toAddMsg])
+    setStoredMessage("set",toAddMsg)
+    setAllMessage(setStoredMessage("get"))
     document.getElementById('inputedText').value = "";
   }
 
 
-  // Print allMessage function every 2 seconds to see where it is going wrong.
-  // const disAllMess = setInterval(()=>{
-  //   console.log("Every 2 seconds value of allMessage is: ", allMessage)
-  // },2*1000)
-
-
   const navigate = useNavigate();
-
-  //Remove previous message if any
 
   // Exit the page if the ip is not saved in the server
   useEffect(()=>{
-    // console.log("We entered the login page");
-    // fetch('https://nodejsdotchatbackend.onrender.com/checklogin')
-    fetch('http://localhost:8081/checklogin')
+
+    fetch('https://nodejsdotchatbackend.onrender.com/checklogin')
+    // fetch('http://localhost:8081/checklogin')
     .then(data=>data.json())
     .then(data=>{ 
       if(data.loggedin === false){
@@ -102,8 +83,8 @@ export default function Homepage() {
   const logoutPrompt = ()=>{
     let response = window.confirm("Do you really want to logout");
     if(response){
-      // fetch("https://nodejsdotchatbackend.onrender.com/logoutme")
-      fetch("http://localhost:8081/logoutme")
+      fetch("https://nodejsdotchatbackend.onrender.com/logoutme")
+      // fetch("http://localhost:8081/logoutme")
       .then(data=>navigate("/"));
     }
   }
